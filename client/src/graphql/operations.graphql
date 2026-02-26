@@ -1,0 +1,73 @@
+# Sample GraphQL operations for codegen
+# Add your queries and mutations here.
+# When you run `npm run generate`, codegen will read these
+# and produce typed RTK Query hooks in `src/store/api.generated.ts`.
+
+query GetForms {
+  forms {
+    id
+    title
+    description
+    createdAt
+  }
+}
+
+query GetForm($id: ID!) {
+  form(id: $id) {
+    id
+    title
+    description
+    questions {
+      id
+      text
+      type
+      options
+      required
+      order
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+mutation CreateForm($input: CreateFormInput!) {
+  createForm(input: $input) {
+    id
+    title
+    description
+    questions {
+      id
+      text
+      type
+      options
+      required
+      order
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+mutation SubmitResponse($input: SubmitResponseInput!) {
+  submitResponse(input: $input) {
+    id
+    formId
+    answers {
+      questionId
+      value
+    }
+    submittedAt
+  }
+}
+
+query GetResponses($formId: ID!) {
+  responses(formId: $formId) {
+    id
+    formId
+    submittedAt
+    answers {
+      questionId
+      value
+    }
+  }
+}
