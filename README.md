@@ -4,7 +4,7 @@ A simplified clone of Google Forms with core functionality for form creation, vi
 
 ## Tech Stack
 
-**Frontend:** React, TypeScript, Redux Toolkit, RTK Query, React Router, Vite, plain CSS  
+**Frontend:** React, TypeScript, Redux Toolkit, RTK Query, React Router, Vite, TailwindCSS  
 **Backend:** Node.js, TypeScript, Apollo Server, Express, GraphQL  
 **Tooling:** npm workspaces (monorepo), GraphQL codegen, concurrently
 
