@@ -1,4 +1,4 @@
-# Google Forms Lite
+# Google Forms Lite Clone
 
 A simplified clone of Google Forms with core functionality for form creation, viewing, and submission. With this app you can create forms with different types of questions such as text, multiple choice, checkboxes, and date, mark questions as required, and fill out existing forms. Users have access to all submitted responses and can view them per form.
 
