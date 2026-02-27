@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { useSubmitResponseMutation } from "../store/api";
+import type { GetFormQuery } from "../store/api";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-export function useFormFiller(id: string, form: any) {
+// The form shape as returned by the GetForm query, excluding null
+type FilledForm = NonNullable<GetFormQuery["form"]>;
+
+export function useFormFiller(id: string, form: FilledForm | null | undefined) {
     const [submitResponse] = useSubmitResponseMutation();
     const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
     const [status, setStatus] = useState<FormStatus>("idle");
 
-    const setAnswer = (questionId: string, value: string | string[]) => {
+    const setAnswer = (questionId: string, value: string | string[]): void => {
         setAnswers((prev) => ({ ...prev, [questionId]: value }));
     };
 
-    const toggleCheckbox = (questionId: string, option: string) => {
+    const toggleCheckbox = (questionId: string, option: string): void => {
         const currentOptions = (answers[questionId] as string[]) || [];
         const newOptions = currentOptions.includes(option)
             ? currentOptions.filter((o) => o !== option)
@@ -20,12 +24,12 @@ export function useFormFiller(id: string, form: any) {
         setAnswer(questionId, newOptions);
     };
 
-    const resetForm = () => {
+    const resetForm = (): void => {
         setAnswers({});
         setStatus("idle");
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
         if (!form) return;
 
@@ -53,18 +57,11 @@ export function useFormFiller(id: string, form: any) {
                 },
             }).unwrap();
             setStatus("success");
-        } catch (err) {
+        } catch (err: unknown) {
             console.error("Failed to submit:", err);
             setStatus("error");
         }
     };
 
-    return {
-        answers,
-        status,
-        setAnswer,
-        toggleCheckbox,
-        handleSubmit,
-        resetForm,
-    };
+    return { answers, status, setAnswer, toggleCheckbox, handleSubmit, resetForm };
 }

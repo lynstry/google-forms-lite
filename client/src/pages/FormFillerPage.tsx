@@ -108,7 +108,7 @@ export function FormFillerPage() {
                                 <label htmlFor={q.id} style={{ display: "block", marginBottom: 12, fontWeight: 500 }}>
                                     {q.text} {q.required && <span style={{ color: "var(--color-error)" }}>*</span>}
                                 </label>
-                                {q.type === "SHORT_ANSWER" && (
+                                {q.type === "TEXT" && (
                                     <input
                                         id={q.id}
                                         type="text"
@@ -116,16 +116,6 @@ export function FormFillerPage() {
                                         value={answers[q.id] || ""}
                                         onChange={(e) => setAnswer(q.id, e.target.value)}
                                         placeholder="Your answer"
-                                    />
-                                )}
-                                {q.type === "PARAGRAPH" && (
-                                    <textarea
-                                        id={q.id}
-                                        className="form-textarea"
-                                        value={answers[q.id] || ""}
-                                        onChange={(e) => setAnswer(q.id, e.target.value)}
-                                        placeholder="Your answer"
-                                        rows={3}
                                     />
                                 )}
                                 {q.type === "MULTIPLE_CHOICE" && (

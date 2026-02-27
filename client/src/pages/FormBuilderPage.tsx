@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import { useFormBuilder } from "../hooks/useFormBuilder";
 
 const QUESTION_TYPE_LABELS: Record<string, string> = {
-    SHORT_ANSWER: "Short answer",
-    PARAGRAPH: "Paragraph",
+    TEXT: "Text",
     MULTIPLE_CHOICE: "Multiple choice",
     CHECKBOX: "Checkboxes",
-    DROPDOWN: "Dropdown",
     DATE: "Date",
 };
 
@@ -30,7 +28,7 @@ export function FormBuilderPage() {
     } = useFormBuilder();
 
     const hasChoiceOptions = (type: string) =>
-        type === "MULTIPLE_CHOICE" || type === "CHECKBOX" || type === "DROPDOWN";
+        type === "MULTIPLE_CHOICE" || type === "CHECKBOX";
 
     return (
         <div className="page-content">
@@ -106,11 +104,8 @@ export function FormBuilderPage() {
                         </div>
 
                         <div className="question-card__answer-preview">
-                            {q.type === "SHORT_ANSWER" && (
-                                <input type="text" className="form-input" placeholder="Short answer text" disabled />
-                            )}
-                            {q.type === "PARAGRAPH" && (
-                                <textarea className="form-input" placeholder="Long answer text" disabled />
+                            {q.type === "TEXT" && (
+                                <input type="text" className="form-input" placeholder="Text" disabled />
                             )}
                             {hasChoiceOptions(q.type) && (
                                 <div className="options-list">

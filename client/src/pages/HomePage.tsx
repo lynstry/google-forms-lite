@@ -54,7 +54,7 @@ export function HomePage() {
             ) : (
                 <div className="forms-grid">
                     {forms.map((form, i) => (
-                        <FormCard key={form.id} form={form} />
+                        <FormCard key={form.id} form={form} index={i} />
                     ))}
                 </div>
             )}

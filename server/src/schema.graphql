@@ -1,9 +1,7 @@
 enum QuestionType {
-  SHORT_ANSWER
-  PARAGRAPH
+  TEXT
   MULTIPLE_CHOICE
   CHECKBOX
-  DROPDOWN
   DATE
 }
 

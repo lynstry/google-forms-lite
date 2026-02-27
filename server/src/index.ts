@@ -12,32 +12,97 @@ const __dirname = dirname(__filename);
 // Read the schema file
 const typeDefs = readFileSync(resolve(__dirname, "schema.graphql"), "utf-8");
 
+// ----- Domain Types (mirror the GraphQL schema) -----
+
+type QuestionType =
+    | "TEXT"
+    | "MULTIPLE_CHOICE"
+    | "CHECKBOX"
+    | "DATE";
+
+interface Question {
+    id: string;
+    text: string;
+    type: QuestionType;
+    options: string[] | null;
+    required: boolean;
+    order: number;
+}
+
+interface Form {
+    id: string;
+    title: string;
+    description: string | null;
+    questions: Question[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface Answer {
+    questionId: string;
+    value: string;
+}
+
+interface FormResponse {
+    id: string;
+    formId: string;
+    answers: Answer[];
+    submittedAt: string;
+}
+
+// ----- Input Types (what the resolvers receive from Apollo) -----
+
+interface QuestionInput {
+    text: string;
+    type: QuestionType;
+    options?: string[] | null;
+    required: boolean;
+    order: number;
+}
+
+interface CreateFormInput {
+    title: string;
+    description?: string | null;
+    questions: QuestionInput[];
+}
+
+interface AnswerInput {
+    questionId: string;
+    value: string;
+}
+
+interface SubmitResponseInput {
+    formId: string;
+    answers: AnswerInput[];
+}
+
 // ----- In-Memory Data Store -----
-const forms: any[] = [];
-const responses: any[] = [];
+const forms: Form[] = [];
+const responses: FormResponse[] = [];
 
 // Helper to generate IDs
-const generateId = () => Math.random().toString(36).substring(2, 11);
+const generateId = (): string => Math.random().toString(36).substring(2, 11);
 
 const resolvers = {
     Query: {
-        forms: () => forms,
-        form: (_: unknown, { id }: { id: string }) => {
-            return forms.find((f) => f.id === id) || null;
+        forms: (): Form[] => forms,
+        form: (_: unknown, { id }: { id: string }): Form | null => {
+            return forms.find((f) => f.id === id) ?? null;
         },
-        responses: (_: unknown, { formId }: { formId: string }) => {
+        responses: (_: unknown, { formId }: { formId: string }): FormResponse[] => {
             return responses.filter((r) => r.formId === formId);
         },
     },
     Mutation: {
-        createForm: (_: unknown, { input }: { input: any }) => {
-            const newForm = {
+        createForm: (_: unknown, { input }: { input: CreateFormInput }): Form => {
+            const newForm: Form = {
                 id: generateId(),
                 title: input.title,
-                description: input.description,
-                questions: input.questions.map((q: any) => ({
+                description: input.description ?? null,
+                questions: input.questions.map((q) => ({
                     ...q,
                     id: generateId(),
+                    options: q.options ?? null,
                 })),
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString(),
@@ -45,8 +110,8 @@ const resolvers = {
             forms.push(newForm);
             return newForm;
         },
-        submitResponse: (_: unknown, { input }: { input: any }) => {
-            const newResponse = {
+        submitResponse: (_: unknown, { input }: { input: SubmitResponseInput }): FormResponse => {
+            const newResponse: FormResponse = {
                 id: generateId(),
                 formId: input.formId,
                 answers: input.answers,
@@ -60,7 +125,7 @@ const resolvers = {
 
 // ----- Server Bootstrap -----
 
-async function startServer() {
+async function startServer(): Promise<void> {
     const app = express();
     const PORT = Number(process.env.PORT) || 4000;
 
@@ -83,7 +148,7 @@ async function startServer() {
     });
 }
 
-startServer().catch((err) => {
+startServer().catch((err: unknown) => {
     console.error("Failed to start server:", err);
     process.exit(1);
 });

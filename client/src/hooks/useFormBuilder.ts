@@ -19,8 +19,8 @@ function makeId(): string {
     return Math.random().toString(36).slice(2, 9);
 }
 
-function makeQuestion(type: string = "SHORT_ANSWER"): Question {
-    const isChoice = type === "MULTIPLE_CHOICE" || type === "CHECKBOX" || type === "DROPDOWN";
+function makeQuestion(type: string = "TEXT"): Question {
+    const isChoice = type === "MULTIPLE_CHOICE" || type === "CHECKBOX";
     return {
         id: makeId(),
         text: "",
@@ -36,7 +36,7 @@ export function useFormBuilder() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [questions, setQuestions] = useState<Question[]>(() => [makeQuestion("SHORT_ANSWER")]);
+    const [questions, setQuestions] = useState<Question[]>(() => [makeQuestion("TEXT")]);
     const [focusedId, setFocusedId] = useState<string | null>(null);
     const [saving, setSaving] = useState(false);
 

@@ -104,10 +104,8 @@ export type QuestionInput = {
 export enum QuestionType {
   Checkbox = 'CHECKBOX',
   Date = 'DATE',
-  Dropdown = 'DROPDOWN',
   MultipleChoice = 'MULTIPLE_CHOICE',
-  Paragraph = 'PARAGRAPH',
-  ShortAnswer = 'SHORT_ANSWER'
+  Text = 'TEXT'
 }
 
 export type SubmitResponseInput = {

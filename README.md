@@ -1,6 +1,6 @@
 # Google Forms Lite
 
-This React app is a clone of Google Forms, providing basic functionality for creating and filling out forms. The UI is similar to the original Google product with simplified functionality. With this clone you can create forms with different types of questions (e.g., short answer, multiple choice, dropdown, etc.), make questions required, and fill out existing forms. Users have access to all submitted responses and can view them per form.
+A simplified clone of Google Forms with core functionality for form creation, viewing, and submission. With this app you can create forms with different types of questions such as text, multiple choice, checkboxes, and date, mark questions as required, and fill out existing forms. Users have access to all submitted responses and can view them per form.
 
 ## Tech Stack
 
@@ -65,5 +65,5 @@ npm run dev
 
 ## Notes
 
-1. Data is **in-memory only** — a server restart will reset all data.
+1. Data is **in-memory only** - a server restart will reset all data.
 2. No authentication is implemented.
