@@ -10,19 +10,19 @@ interface StubForm {
 const ACCENT_COLORS = [
     "var(--color-accent)",
     "var(--color-primary)",
-    "#009688",
-    "#e91e63",
-    "#ff9800",
-    "#4caf50",
+    "var(--color-accent-teal)",
+    "var(--color-accent-pink)",
+    "var(--color-accent-orange)",
+    "var(--color-accent-green)",
 ];
 
 const STRIPE_COLORS = [
-    "#ff9800",
+    "var(--color-accent-orange)",
     "var(--color-primary)",
-    "#26a69a",
-    "#ec407a",
-    "#ffa726",
-    "#66bb6a",
+    "var(--color-accent-teal)",
+    "var(--color-accent-pink)",
+    "var(--color-accent-orange)",
+    "var(--color-accent-green)",
 ];
 
 
