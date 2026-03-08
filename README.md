@@ -1,10 +1,10 @@
-# Google Forms Lite
+# Google Forms Lite Clone
 
 A simplified clone of Google Forms with core functionality for form creation, viewing, and submission. With this app you can create forms with different types of questions such as text, multiple choice, checkboxes, and date, mark questions as required, and fill out existing forms. Users have access to all submitted responses and can view them per form.
 
 ## Tech Stack
 
-**Frontend:** React, TypeScript, Redux Toolkit, RTK Query, React Router, Vite, plain CSS  
+**Frontend:** React, TypeScript, Redux Toolkit, RTK Query, React Router, Vite, TailwindCSS  
 **Backend:** Node.js, TypeScript, Apollo Server, Express, GraphQL  
 **Tooling:** npm workspaces (monorepo), GraphQL codegen, concurrently
 
