@@ -18,8 +18,11 @@ google-forms-lite/
 │   │   ├── hooks/
 │   │   ├── pages/
 │   │   ├── store/
+│   │   ├── types/       # Client-only types (e.g. builder draft models)
 │   │   └── graphql/
 ├── server/          # Node.js GraphQL backend
+│   └── src/
+├── shared/          # Shared types between client and server
 │   └── src/
 └── package.json     # Root monorepo config
 ```

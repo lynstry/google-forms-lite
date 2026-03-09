@@ -45,7 +45,7 @@ export function HomePage() {
                 </div>
             ) : forms.length === 0 ? (
                 <div className="empty-state">
-                    <div className="empty-state__icon">📄</div>
+                    <div className="empty-state__icon"></div>
                     <p className="empty-state__title">No forms yet</p>
                     <p className="empty-state__subtitle">
                         Click the button above or the floating action button below to create your first form.

@@ -12,7 +12,12 @@
         "declarationMap": true,
         "sourceMap": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "paths": {
+            "shared": [
+                "../shared/src/index.ts"
+            ]
+        }
     },
     "include": [
         "src/**/*"

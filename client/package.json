@@ -15,7 +15,8 @@
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-redux": "^9.2.0",
-        "react-router-dom": "^7.2.0"
+        "react-router-dom": "^7.2.0",
+        "shared": "*"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "^5.0.4",

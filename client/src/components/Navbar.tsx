@@ -5,7 +5,7 @@ export function Navbar() {
         <header className="navbar">
             <Link to="/" className="navbar__logo">
                 <svg className="navbar__logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="48" rx="4" fill="#7248bd" />
+                    <rect width="48" height="48" rx="4" fill="var(--color-accent)" />
                     <rect x="12" y="13" width="24" height="3" rx="1.5" fill="white" />
                     <rect x="12" y="20" width="20" height="3" rx="1.5" fill="white" />
                     <rect x="12" y="27" width="16" height="3" rx="1.5" fill="white" />

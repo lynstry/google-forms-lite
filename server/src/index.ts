@@ -5,82 +5,17 @@ import cors from "cors";
 import { readFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
+import { Form, FormResponse, Question, CreateFormInput, SubmitResponseInput } from "shared";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Read the schema file
 const typeDefs = readFileSync(resolve(__dirname, "schema.graphql"), "utf-8");
 
-// ----- Domain Types (mirror the GraphQL schema) -----
 
-type QuestionType =
-    | "TEXT"
-    | "MULTIPLE_CHOICE"
-    | "CHECKBOX"
-    | "DATE";
-
-interface Question {
-    id: string;
-    text: string;
-    type: QuestionType;
-    options: string[] | null;
-    required: boolean;
-    order: number;
-}
-
-interface Form {
-    id: string;
-    title: string;
-    description: string | null;
-    questions: Question[];
-    createdAt: string;
-    updatedAt: string;
-}
-
-interface Answer {
-    questionId: string;
-    value: string;
-}
-
-interface FormResponse {
-    id: string;
-    formId: string;
-    answers: Answer[];
-    submittedAt: string;
-}
-
-// ----- Input Types (what the resolvers receive from Apollo) -----
-
-interface QuestionInput {
-    text: string;
-    type: QuestionType;
-    options?: string[] | null;
-    required: boolean;
-    order: number;
-}
-
-interface CreateFormInput {
-    title: string;
-    description?: string | null;
-    questions: QuestionInput[];
-}
-
-interface AnswerInput {
-    questionId: string;
-    value: string;
-}
-
-interface SubmitResponseInput {
-    formId: string;
-    answers: AnswerInput[];
-}
-
-// ----- In-Memory Data Store -----
 const forms: Form[] = [];
 const responses: FormResponse[] = [];
 
-// Helper to generate IDs
 const generateId = (): string => Math.random().toString(36).substring(2, 11);
 
 const resolvers = {

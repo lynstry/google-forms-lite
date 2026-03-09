@@ -1,19 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateFormMutation, QuestionType } from "../store/api";
+import type { Question } from "../types";
 
-interface QuestionOption {
-    id: string;
-    text: string;
-}
-
-interface Question {
-    id: string;
-    text: string;
-    type: string;
-    options: QuestionOption[];
-    required: boolean;
-}
 
 function makeId(): string {
     return Math.random().toString(36).slice(2, 9);
